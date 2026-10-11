@@ -27,6 +27,9 @@ export type Stat = { label: string; value: number; suffix?: string };
 
 export type TimelineEntry = { year: number; title: string; description: string };
 
+/** A full-page screenshot of a site. Width/height are the file's pixel size (used to reserve layout space). */
+export type Screenshot = { src: string; width: number; height: number };
+
 export type Subsidiary = {
   slug: string;
   name: string;
@@ -43,6 +46,10 @@ export type Subsidiary = {
   stats: Stat[];
   timeline: TimelineEntry[];
   capabilities: string[];
+  /** The subsidiary's own website, if it has one. */
+  website?: string;
+  /** Screenshot of the website, shown in the home page showcase and the subsidiary page. */
+  screenshot: Screenshot;
 };
 
 export type Service = {

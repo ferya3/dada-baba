@@ -21,10 +21,10 @@ npm run typecheck
 
 | مسیر | صفحه |
 | --- | --- |
-| `/` | خانه: Hero سه‌بعدی، آمار، مدار ۵ زیرمجموعه (چرخش با اسکرول)، پروژه‌ها با اسکرول افقی pin‌شده، خدمات، اخبار |
+| `/` | خانه: Hero سه‌بعدی، آمار، ویترین ۵ زیرمجموعه (تصویر سایت هر شرکت که با اسکرول عوض می‌شود)، پروژه‌ها با اسکرول افقی pin‌شده، خدمات، اخبار |
 | `/about` | درباره هلدینگ: مأموریت، داستان، ارزش‌ها، تایم‌لاین، مدیران |
 | `/subsidiaries` | نمای کلی با کارت‌های tilt + glow |
-| `/subsidiaries/[slug]` | صفحه هر زیرمجموعه: Hero سه‌بعدی اختصاصی، شمارنده‌ها، تایم‌لاین، پروژه‌ها، اخبار |
+| `/subsidiaries/[slug]` | صفحه هر زیرمجموعه: Hero سه‌بعدی اختصاصی، شمارنده‌ها، پیش‌نمایش وب‌سایت، تایم‌لاین، پروژه‌ها، اخبار |
 | `/services` | خدمات و زیرمجموعه‌های ارائه‌دهنده |
 | `/projects` | پروژه‌ها با فیلتر انیمیشنی |
 | `/news`، `/news/[slug]` | اخبار و دیدگاه‌ها |
@@ -38,7 +38,7 @@ npm run typecheck
 ```
 app/                    صفحات، sitemap.ts، robots.ts، template.tsx (page transition)
 components/
-  3d/                   HeroScene، SubsidiaryOrbit، SubsidiaryScene، Logo3D، City، SceneFallback
+  3d/                   HeroScene، SubsidiaryScene، Logo3D، City، SceneFallback
                         index.tsx = نقطه ورود lazy با تشخیص کیفیت و fallback
   motion/               SmoothScroll (Lenis)، Reveal، Parallax، MagneticButton، SplitText،
                         Counter، TiltCard، HorizontalScroll (GSAP)، CustomCursor، ScrollProgress
@@ -47,9 +47,19 @@ components/
   seo/JsonLd.tsx        Schema.org: Organization + subOrganization، BreadcrumbList، Article
   ui/                   کامپوننت‌های shadcn
 lib/content/            مدل محتوا (types.ts)، داده نمونه (data.ts)، لایه دسترسی (index.ts)
-store/ui.ts             Zustand: منو، حالت cursor، زیرمجموعه فعال
+store/ui.ts             Zustand: وضعیت منوی موبایل
 hooks/                  useMediaQuery، use3DQuality
 ```
+
+## تصویر سایت زیرمجموعه‌ها
+
+تصاویر فعلی در `public/subsidiaries/` **نمونه** هستند. برای هر شرکت:
+
+1. از سایت واقعی یک **اسکرین‌شات تمام‌صفحه** (Full-page) با عرض ۱۴۴۰ پیکسل بگیرید؛ مثلاً در Chrome: DevTools ← `Ctrl+Shift+P` ← «Capture full size screenshot».
+2. فایل را با نام همان slug (مثلاً `public/subsidiaries/avand-energy.jpg`) جایگزین کنید.
+3. در `lib/content/data.ts` مقدار `screenshot.width` و `screenshot.height` را با اندازه واقعی فایل و `website` را با آدرس سایت به‌روز کنید.
+
+هر ارتفاعی قابل قبول است: تصویر داخل قاب مرورگر به اندازه طول صفحه اسکرول می‌شود. Next.js تصاویر را خودکار به AVIF/WebP و اندازه مناسب تبدیل می‌کند. اگر شرکتی وب‌سایت ندارد، `website` را حذف کنید تا دکمه «وب‌سایت» نمایش داده نشود.
 
 ## اتصال به CMS
 

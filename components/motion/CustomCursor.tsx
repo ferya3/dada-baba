@@ -3,14 +3,13 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
 import { useMediaQuery, usePrefersReducedMotion } from "@/hooks/use-media-query";
-import { useUIStore } from "@/store/ui";
 import { cn } from "@/lib/utils";
 
 const INTERACTIVE = "a, button, [role='button'], input, textarea, select, label, [data-cursor]";
 
 /**
  * Dot + trailing ring cursor. Grows over interactive elements and can show a
- * label (`data-cursor-label="..."` or the UI store). Only on mouse devices
+ * label (`data-cursor-label="..."` on the element). Only on mouse devices
  * without reduced motion; everyone else keeps the native cursor.
  */
 export function CustomCursor() {
@@ -18,8 +17,7 @@ export function CustomCursor() {
   const reducedMotion = usePrefersReducedMotion();
   const enabled = finePointer && !reducedMotion;
 
-  const storeCursor = useUIStore((s) => s.cursor);
-  const [hoverLabel, setHoverLabel] = useState<string | null>(null);
+  const [label, setLabel] = useState<string | null>(null);
   const [hovering, setHovering] = useState(false);
   const [visible, setVisible] = useState(false);
 
@@ -42,7 +40,7 @@ export function CustomCursor() {
     const onOver = (e: PointerEvent) => {
       const target = (e.target as Element | null)?.closest<HTMLElement>(INTERACTIVE);
       setHovering(!!target);
-      setHoverLabel(target?.dataset.cursorLabel ?? null);
+      setLabel(target?.dataset.cursorLabel ?? null);
     };
     const onLeave = () => setVisible(false);
 
@@ -59,9 +57,7 @@ export function CustomCursor() {
 
   if (!enabled) return null;
 
-  const label = storeCursor.variant === "label" ? storeCursor.label : hoverLabel;
-  const active = hovering || storeCursor.variant !== "default";
-  const size = label ? 88 : active ? 56 : 32;
+  const size = label ? 88 : hovering ? 56 : 32;
 
   return (
     <div aria-hidden className={cn("pointer-events-none fixed inset-0 z-[100]", !visible && "opacity-0")}>
@@ -72,7 +68,7 @@ export function CustomCursor() {
       <motion.div
         className={cn(
           "absolute top-0 left-0 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-primary/60 transition-[width,height,background-color] duration-300 ease-out",
-          label ? "bg-primary text-primary-foreground" : active ? "bg-primary/10" : "bg-transparent",
+          label ? "bg-primary text-primary-foreground" : hovering ? "bg-primary/10" : "bg-transparent",
         )}
         style={{ x: ringX, y: ringY, width: size, height: size }}
       >

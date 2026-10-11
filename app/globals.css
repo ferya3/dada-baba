@@ -57,6 +57,8 @@
 
   html {
     color-scheme: dark;
+    /* Decorative glows may bleed past the edge; never let them create sideways scroll (mobile layout viewports widen otherwise). */
+    overflow-x: clip;
     -webkit-text-size-adjust: 100%;
   }
 

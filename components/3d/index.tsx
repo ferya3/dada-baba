@@ -2,11 +2,10 @@
 
 import dynamic from "next/dynamic";
 import { useRef } from "react";
-import { useInView, type MotionValue } from "framer-motion";
+import { useInView } from "framer-motion";
 import { use3DQuality, type Quality3D } from "@/hooks/use-3d-quality";
 import { cn } from "@/lib/utils";
 import { SceneFallback } from "./SceneFallback";
-import type { OrbitItem } from "./SubsidiaryOrbit";
 import type { SceneShape } from "@/lib/content/types";
 
 /*
@@ -15,7 +14,6 @@ import type { SceneShape } from "@/lib/content/types";
  * should render it; otherwise the 2D fallback is all that ships.
  */
 const HeroScene = dynamic(() => import("./HeroScene"), { ssr: false });
-const SubsidiaryOrbit = dynamic(() => import("./SubsidiaryOrbit"), { ssr: false });
 const SubsidiaryScene = dynamic(() => import("./SubsidiaryScene"), { ssr: false });
 
 type GateProps = {
@@ -50,22 +48,6 @@ export function HeroCanvas({ colors, className }: { colors: string[]; className?
   );
 }
 
-export function OrbitCanvas({
-  items,
-  progress,
-  className,
-}: {
-  items: OrbitItem[];
-  progress: MotionValue<number>;
-  className?: string;
-}) {
-  return (
-    <SceneGate className={className}>
-      {(quality, active) => <SubsidiaryOrbit quality={quality} items={items} progress={progress} active={active} />}
-    </SceneGate>
-  );
-}
-
 export function SubsidiaryCanvas({
   shape,
   color,
@@ -81,5 +63,3 @@ export function SubsidiaryCanvas({
     </SceneGate>
   );
 }
-
-export type { OrbitItem };

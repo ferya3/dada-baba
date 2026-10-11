@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getHolding, getNews, getProjects, getServices, getSubsidiaries } from "@/lib/content";
 import { HomeHero } from "@/components/sections/home/HomeHero";
-import { SubsidiaryOrbitSection } from "@/components/sections/home/SubsidiaryOrbitSection";
+import { SubsidiaryShowcase } from "@/components/sections/home/SubsidiaryShowcase";
 import { SectionHeading } from "@/components/sections/SectionHeading";
 import { StatsGrid } from "@/components/sections/StatsGrid";
 import { ProjectCard } from "@/components/sections/ProjectCard";
@@ -52,14 +52,16 @@ export default async function HomePage() {
         <StatsGrid stats={holding.stats} className="mt-16" />
       </section>
 
-      <SubsidiaryOrbitSection
-        items={subsidiaries.map(({ slug, name, color, shape, sector, summary }) => ({
+      <SubsidiaryShowcase
+        items={subsidiaries.map(({ slug, name, sector, summary, color, website, screenshot, stats }) => ({
           slug,
           name,
-          color,
-          shape,
           sector,
           summary,
+          color,
+          website,
+          screenshot,
+          stats: stats.slice(0, 2),
         }))}
       />
 

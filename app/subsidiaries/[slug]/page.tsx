@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Check } from "lucide-react";
+import { ArrowLeft, ArrowUpLeft, Check } from "lucide-react";
 import { getNews, getProjects, getSubsidiaries, getSubsidiary } from "@/lib/content";
 import { SubsidiaryCanvas } from "@/components/3d";
 import { SectionHeading } from "@/components/sections/SectionHeading";
@@ -10,6 +10,9 @@ import { Timeline } from "@/components/sections/Timeline";
 import { ProjectCard } from "@/components/sections/ProjectCard";
 import { NewsCard } from "@/components/sections/NewsCard";
 import { CallToAction } from "@/components/sections/CallToAction";
+import { SitePreview } from "@/components/sections/SitePreview";
+import { displayHost } from "@/components/sections/BrowserFrame";
+import { Button } from "@/components/ui/button";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { SplitText } from "@/components/motion/SplitText";
 import { JsonLd, breadcrumbs, subsidiaryOrganization } from "@/components/seo/JsonLd";
@@ -94,6 +97,34 @@ export default async function SubsidiaryPage({ params }: Props) {
             ))}
           </RevealGroup>
         </div>
+      </section>
+
+      <section className="container-page grid items-center gap-12 py-24 lg:grid-cols-[1fr_1.4fr]">
+        <div className="flex flex-col gap-6">
+          <SectionHeading
+            eyebrow="وب‌سایت"
+            title={`${subsidiary.name} در وب`}
+            description="خدمات، پروژه‌ها و راه‌های ارتباط با این شرکت را در وب‌سایت اختصاصی آن ببینید."
+          />
+          {subsidiary.website && (
+            <Reveal delay={0.2}>
+              <Button asChild variant="outline">
+                <a href={subsidiary.website} target="_blank" rel="noopener noreferrer" dir="ltr">
+                  <ArrowUpLeft />
+                  {displayHost(subsidiary.website)}
+                </a>
+              </Button>
+            </Reveal>
+          )}
+        </div>
+        <Reveal>
+          <SitePreview
+            name={subsidiary.name}
+            website={subsidiary.website}
+            screenshot={subsidiary.screenshot}
+            color={color}
+          />
+        </Reveal>
       </section>
 
       <section className="container-page grid gap-12 py-24 lg:grid-cols-2">

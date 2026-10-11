@@ -5,6 +5,8 @@ import type { HoldingProfile, Job, NewsPost, Project, Service, Subsidiary } from
  * subsidiaries — replace it with real data or move it into the CMS.
  * Years are in the Solar Hijri calendar; news dates are ISO (Gregorian) and are
  * rendered with the Persian calendar by `formatFaDate`.
+ * Subsidiary `website` URLs and the screenshots in /public/subsidiaries are
+ * placeholders too — drop each site's real full-page screenshot in its place.
  */
 
 export const holding: HoldingProfile = {
@@ -78,6 +80,8 @@ export const subsidiaries: Subsidiary[] = [
       { year: 1403, title: "برج‌های آوند", description: "تحویل مجموعه ۴۲ طبقه برج‌های آوند." },
     ],
     capabilities: ["طراحی و مهندسی سازه", "اجرای EPC", "مدیریت پروژه", "ساخت صنعتی و پیش‌ساخته", "مقاوم‌سازی"],
+    website: "https://sazeh.example.com",
+    screenshot: { src: "/subsidiaries/avand-sazeh.jpg", width: 1440, height: 2700 },
   },
   {
     slug: "avand-energy",
@@ -106,6 +110,8 @@ export const subsidiaries: Subsidiary[] = [
       { year: 1404, title: "ذخیره‌سازی", description: "راه‌اندازی نخستین سامانه ذخیره باتری صنعتی." },
     ],
     capabilities: ["نیروگاه خورشیدی", "مزرعه بادی", "ممیزی انرژی", "ذخیره‌سازی باتری", "بهره‌برداری و نگهداری"],
+    website: "https://energy.example.com",
+    screenshot: { src: "/subsidiaries/avand-energy.jpg", width: 1440, height: 2700 },
   },
   {
     slug: "avand-tech",
@@ -134,6 +140,8 @@ export const subsidiaries: Subsidiary[] = [
       { year: 1404, title: "هوش مصنوعی", description: "تأسیس آزمایشگاه هوش مصنوعی صنعتی." },
     ],
     capabilities: ["نرم‌افزار سازمانی", "اینترنت اشیای صنعتی", "تحلیل داده و هوش مصنوعی", "زیرساخت ابری", "امنیت سایبری"],
+    website: "https://tech.example.com",
+    screenshot: { src: "/subsidiaries/avand-tech.jpg", width: 1440, height: 2700 },
   },
   {
     slug: "avand-trade",
@@ -162,6 +170,8 @@ export const subsidiaries: Subsidiary[] = [
       { year: 1404, title: "کریدور شمال-جنوب", description: "ورود به ترانزیت در کریدور بین‌المللی." },
     ],
     capabilities: ["صادرات و واردات", "تأمین تجهیزات صنعتی", "حمل‌ونقل چندوجهی", "انبارداری", "ترخیص کالا"],
+    website: "https://trade.example.com",
+    screenshot: { src: "/subsidiaries/avand-trade.jpg", width: 1440, height: 2700 },
   },
   {
     slug: "avand-capital",
@@ -190,6 +200,8 @@ export const subsidiaries: Subsidiary[] = [
       { year: 1403, title: "سرمایه‌گذاری سبز", description: "اختصاص سبد ویژه به پروژه‌های پایدار." },
     ],
     capabilities: ["تأمین مالی پروژه", "مدیریت دارایی", "سرمایه‌گذاری خطرپذیر", "مشاوره ادغام و تملک", "انتشار اوراق"],
+    website: "https://capital.example.com",
+    screenshot: { src: "/subsidiaries/avand-capital.jpg", width: 1440, height: 2700 },
   },
 ];
 
