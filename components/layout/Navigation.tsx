@@ -4,13 +4,13 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { mainNav, siteConfig } from "@/lib/site";
+import { mainNav } from "@/lib/site";
 import { cn, toFaDigits } from "@/lib/utils";
 import { useUIStore } from "@/store/ui";
 import { getLenis } from "@/components/motion/SmoothScroll";
 
 /** Full-screen mobile menu with staggered links. */
-export function Navigation({ isActive }: { isActive: (href: string) => boolean }) {
+export function Navigation({ email, isActive }: { email: string; isActive: (href: string) => boolean }) {
   const open = useUIStore((s) => s.menuOpen);
   const setOpen = useUIStore((s) => s.setMenuOpen);
   const pathname = usePathname();
@@ -75,8 +75,8 @@ export function Navigation({ isActive }: { isActive: (href: string) => boolean }
             </motion.ul>
           </nav>
           <div className="container-page py-6 text-sm text-muted-foreground">
-            <a href={`mailto:${siteConfig.contact.email}`} className="hover:text-foreground">
-              {siteConfig.contact.email}
+            <a href={`mailto:${email}`} className="hover:text-foreground">
+              {email}
             </a>
           </div>
         </motion.div>

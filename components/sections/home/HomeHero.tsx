@@ -9,7 +9,9 @@ import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { SplitText } from "@/components/motion/SplitText";
 
-export function HomeHero({ colors }: { colors: string[] }) {
+type Hero = { badge: string; title: string; description: string };
+
+export function HomeHero({ hero, colors }: { hero: Hero; colors: string[] }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "35%"]);
@@ -34,14 +36,14 @@ export function HomeHero({ colors }: { colors: string[] }) {
           className="inline-flex items-center gap-2 rounded-full border border-border bg-white/[0.04] px-4 py-1.5 text-sm text-muted-foreground backdrop-blur"
         >
           <span className="size-1.5 animate-pulse rounded-full bg-primary" aria-hidden />
-          پنج تخصص، یک چشم‌انداز
+          {hero.badge}
         </motion.span>
 
         <SplitText
           as="h1"
           immediate
           delay={0.3}
-          text="آینده را یکپارچه می‌سازیم"
+          text={hero.title}
           className="mt-6 max-w-4xl text-5xl leading-[1.1] font-black tracking-tight sm:text-7xl lg:text-8xl"
           wordClassName="text-gradient"
         />
@@ -52,8 +54,7 @@ export function HomeHero({ colors }: { colors: string[] }) {
           transition={{ delay: 0.9, duration: 0.9 }}
           className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground sm:text-xl"
         >
-          هلدینگ آوند، گروهی از پنج شرکت پیشرو در عمران، انرژی، فناوری، بازرگانی و سرمایه‌گذاری است که زنجیره کامل ارزش را
-          از ایده تا بهره‌برداری پوشش می‌دهد.
+          {hero.description}
         </motion.p>
 
         <motion.div

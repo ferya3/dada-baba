@@ -10,14 +10,14 @@ import { cn } from "@/lib/utils";
 import { useUIStore } from "@/store/ui";
 import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/motion/MagneticButton";
-import { Logo } from "./Logo";
+import { Logo, type Brand } from "./Logo";
 import { Navigation } from "./Navigation";
 
 function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function Header() {
+export function Header({ brand, email }: { brand: Brand; email: string }) {
   const pathname = usePathname();
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
@@ -47,7 +47,7 @@ export function Header() {
             (scrolled || menuOpen) && "border-border bg-background/70 backdrop-blur-xl",
           )}
         >
-          <Logo />
+          <Logo brand={brand} />
 
           <nav aria-label="ناوبری اصلی" className="hidden lg:block">
             <ul className="flex items-center gap-1">
@@ -98,7 +98,7 @@ export function Header() {
           </div>
         </div>
       </motion.header>
-      <Navigation isActive={(href) => isActive(pathname, href)} />
+      <Navigation email={email} isActive={(href) => isActive(pathname, href)} />
     </>
   );
 }

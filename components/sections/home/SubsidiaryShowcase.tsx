@@ -42,28 +42,30 @@ const pad = (n: number) => toFaDigits(String(n).padStart(2, "0"));
  * the previous one inside a browser frame and then scrolls through the page.
  * On smaller screens it becomes a simple list of framed previews.
  */
-export function SubsidiaryShowcase({ items }: { items: ShowcaseItem[] }) {
+type HeadingCopy = { title: string; description: string };
+
+export function SubsidiaryShowcase({ items, heading }: { items: ShowcaseItem[]; heading: HeadingCopy }) {
   return (
     <section aria-labelledby="subsidiaries-heading">
-      <DesktopShowcase items={items} />
-      <MobileShowcase items={items} />
+      <DesktopShowcase items={items} heading={heading} />
+      <MobileShowcase items={items} heading={heading} />
     </section>
   );
 }
 
-function Heading() {
+function Heading({ title, description }: HeadingCopy) {
   return (
     <div id="subsidiaries-heading">
       <SectionHeading
         eyebrow="زیرمجموعه‌ها"
-        title="پنج شرکت، یک مدار"
-        description="هر زیرمجموعه در صنعت خود پیشرو است و در کنار هم، توانی فراتر از مجموع اجزا می‌سازند."
+        title={title}
+        description={description}
       />
     </div>
   );
 }
 
-function DesktopShowcase({ items }: { items: ShowcaseItem[] }) {
+function DesktopShowcase({ items, heading }: { items: ShowcaseItem[]; heading: HeadingCopy }) {
   const ref = useRef<HTMLDivElement>(null);
   const count = items.length;
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
@@ -85,6 +87,7 @@ function DesktopShowcase({ items }: { items: ShowcaseItem[] }) {
   }
 
   const current = items[active];
+  if (!current) return null;
 
   return (
     <div ref={ref} className="relative hidden lg:block" style={{ height: `${count * 90 + 10}vh` }}>
@@ -99,7 +102,7 @@ function DesktopShowcase({ items }: { items: ShowcaseItem[] }) {
 
         <div className="container-page relative grid grid-cols-[1fr_1.25fr] items-center gap-16">
           <div className="flex flex-col gap-8">
-            <Heading />
+            <Heading {...heading} />
             <ol className="flex flex-col">
               {items.map((item, i) => (
                 <StepItem
@@ -346,10 +349,10 @@ function ItemLinks({ item }: { item: ShowcaseItem }) {
   );
 }
 
-function MobileShowcase({ items }: { items: ShowcaseItem[] }) {
+function MobileShowcase({ items, heading }: { items: ShowcaseItem[]; heading: HeadingCopy }) {
   return (
     <div className="container-page flex flex-col gap-16 py-24 lg:hidden">
-      <Heading />
+      <Heading {...heading} />
       {items.map((item, i) => (
         <article key={item.slug} className="flex flex-col gap-6">
           <SitePreview name={item.name} website={item.website} screenshot={item.screenshot} color={item.color} />

@@ -1,6 +1,6 @@
-import { siteConfig } from "@/lib/site";
+import { siteUrl } from "@/lib/site";
 import { absoluteUrl } from "@/lib/utils";
-import type { Subsidiary } from "@/lib/content/types";
+import type { SiteSettings, Subsidiary } from "@/lib/content/types";
 
 /** Serialises structured data, escaping `<` so content can't break out of the script tag. */
 export function JsonLd({ data }: { data: Record<string, unknown> | Record<string, unknown>[] }) {
@@ -29,20 +29,20 @@ export function subsidiaryOrganization(s: Subsidiary) {
 }
 
 /** Schema.org Organization for the holding, listing the subsidiaries as sub-organizations. */
-export function holdingOrganization(subsidiaries: Subsidiary[]) {
+export function holdingOrganization(settings: SiteSettings, subsidiaries: Subsidiary[]) {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": holdingId,
-    name: siteConfig.name,
-    alternateName: siteConfig.nameEn,
-    url: siteConfig.url,
+    name: settings.name,
+    alternateName: settings.nameEn,
+    url: siteUrl,
     logo: absoluteUrl("/icon.svg"),
-    description: siteConfig.description,
-    email: siteConfig.contact.email,
-    telephone: siteConfig.contact.phone,
-    address: { "@type": "PostalAddress", streetAddress: siteConfig.contact.address, addressCountry: "IR" },
-    sameAs: siteConfig.social.map((s) => s.href),
+    description: settings.description,
+    email: settings.email,
+    telephone: settings.phone,
+    address: { "@type": "PostalAddress", streetAddress: settings.address, addressCountry: "IR" },
+    sameAs: settings.social.map((s) => s.href),
     subOrganization: subsidiaries.map((s) => ({
       "@type": "Organization",
       "@id": absoluteUrl(`/subsidiaries/${s.slug}#organization`),

@@ -1,13 +1,97 @@
-import type { HoldingProfile, Job, NewsPost, Project, Service, Subsidiary } from "./types";
+import type {
+  HoldingProfile,
+  HomeContent,
+  Job,
+  NewsPost,
+  PagesContent,
+  Project,
+  Service,
+  SiteSettings,
+  Subsidiary,
+} from "./types";
 
 /*
- * Local content source. All copy below is sample content for the five
+ * Seed content. On first start the database is filled from these values;
+ * after that everything is edited from the admin panel (/admin). All copy below is sample content for the five
  * subsidiaries — replace it with real data or move it into the CMS.
  * Years are in the Solar Hijri calendar; news dates are ISO (Gregorian) and are
  * rendered with the Persian calendar by `formatFaDate`.
  * Subsidiary `website` URLs and the screenshots in /public/subsidiaries are
  * placeholders too — drop each site's real full-page screenshot in its place.
  */
+
+export const settings: SiteSettings = {
+  name: "هلدینگ آوند",
+  nameEn: "Avand Holding",
+  shortName: "آوند",
+  description:
+    "هلدینگ آوند؛ گروهی از پنج شرکت تخصصی در عمران، انرژی، فناوری، بازرگانی و سرمایه‌گذاری که با یک چشم‌انداز مشترک، آینده را می‌سازند.",
+  foundedYear: 1385,
+  email: "info@example.com",
+  phone: "۰۲۱-۰۰۰۰۰۰۰۰",
+  address: "تهران، خیابان ولیعصر، برج آوند، طبقه ۱۲",
+  social: [
+    { label: "LinkedIn", href: "https://www.linkedin.com/" },
+    { label: "Instagram", href: "https://www.instagram.com/" },
+  ],
+};
+
+export const home: HomeContent = {
+  hero: {
+    badge: "پنج تخصص، یک چشم‌انداز",
+    title: "آینده را یکپارچه می‌سازیم",
+    description:
+      "هلدینگ آوند، گروهی از پنج شرکت پیشرو در عمران، انرژی، فناوری، بازرگانی و سرمایه‌گذاری است که زنجیره کامل ارزش را از ایده تا بهره‌برداری پوشش می‌دهد.",
+  },
+  intro: { title: "دو دهه ساختن، سرمایه‌گذاری و نوآوری" },
+  showcase: {
+    title: "پنج شرکت، یک مدار",
+    description: "هر زیرمجموعه در صنعت خود پیشرو است و در کنار هم، توانی فراتر از مجموع اجزا می‌سازند.",
+  },
+  projects: { title: "کارهایی که به آن‌ها افتخار می‌کنیم" },
+  services: {
+    title: "از مطالعه تا بهره‌برداری، زیر یک سقف",
+    description: "ترکیب توان مهندسی، مالی و فناوری گروه، راهکاری یکپارچه برای پروژه‌های پیچیده فراهم می‌کند.",
+  },
+  news: { title: "تازه‌ترین‌ها از گروه" },
+  cta: {
+    title: "پروژه بعدی را با هم بسازیم",
+    description: "تیم‌های تخصصی پنج شرکت گروه آماده‌اند تا از ایده تا بهره‌برداری کنار شما باشند.",
+  },
+};
+
+export const pages: PagesContent = {
+  about: {
+    title: "ما زنجیره کامل ارزش را می‌سازیم",
+    description: "تبدیل شدن به معتبرترین هلدینگ چندرشته‌ای منطقه تا سال ۱۴۱۰، با تکیه بر نوآوری، شفافیت و توسعه پایدار.",
+  },
+  subsidiaries: {
+    title: "پنج شرکت، پنج تخصص، یک هدف",
+    description: "هر زیرمجموعه مستقل و متخصص است، اما همه از سرمایه، دانش و شبکه مشترک هلدینگ بهره می‌برند.",
+  },
+  services: {
+    title: "یک قرارداد، پنج تخصص",
+    description:
+      "هر خدمت با مشارکت زیرمجموعه‌های مرتبط ارائه می‌شود تا کارفرما با یک تیم یکپارچه و یک پاسخ‌گو روبه‌رو باشد.",
+  },
+  projects: {
+    title: "کارنامه‌ای که خود سخن می‌گوید",
+    description: "گزیده‌ای از پروژه‌هایی که با هم‌افزایی زیرمجموعه‌های گروه به سرانجام رسیده‌اند.",
+  },
+  news: {
+    title: "روایت ما از صنعت و آینده",
+    description: "اخبار گروه، گزارش‌های عملکرد و دیدگاه‌های تخصصی مدیران و کارشناسان ما.",
+  },
+  careers: {
+    title: "آینده را با ما بسازید",
+    description:
+      "در پنج شرکت گروه، فرصت رشد، یادگیری و کار روی پروژه‌هایی را دارید که اثرشان سال‌ها باقی می‌ماند.",
+  },
+  contact: {
+    title: "با ما در ارتباط باشید",
+    description: "برای همکاری، سرمایه‌گذاری یا هر پرسشی، پیام خود را بفرستید. پاسخ ما ظرف دو روز کاری.",
+  },
+};
 
 export const holding: HoldingProfile = {
   mission:

@@ -4,14 +4,13 @@ import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { Reveal } from "@/components/motion/Reveal";
 import { SplitText } from "@/components/motion/SplitText";
+import { getHome } from "@/lib/content";
 
-export function CallToAction({
-  title = "پروژه بعدی را با هم بسازیم",
-  description = "تیم‌های تخصصی پنج شرکت گروه آماده‌اند تا از ایده تا بهره‌برداری کنار شما باشند.",
-}: {
-  title?: string;
-  description?: string;
-}) {
+/** Closing call-to-action band. Defaults to the copy set for it in the admin panel. */
+export async function CallToAction({ title, description }: { title?: string; description?: string }) {
+  const { cta } = await getHome();
+  title ??= cta.title;
+  description ??= cta.description;
   return (
     <section className="container-page py-24">
       <div className="noise relative overflow-hidden rounded-[2rem] border border-border bg-gradient-to-bl from-primary/20 via-card to-card px-6 py-16 text-center sm:px-16 sm:py-24">

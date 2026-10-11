@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { siteConfig } from "@/lib/site";
+import { siteUrl } from "@/lib/site";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -25,5 +25,11 @@ export function formatFaDate(iso: string) {
 }
 
 export function absoluteUrl(path = "/") {
-  return new URL(path, siteConfig.url).toString();
+  return new URL(path, siteUrl).toString();
+}
+
+/** Builds a `tel:` href from a phone number written with Persian or Latin digits. */
+export function telHref(phone: string) {
+  const latin = phone.replace(/[۰-۹]/g, (d) => String("۰۱۲۳۴۵۶۷۸۹".indexOf(d)));
+  return `tel:${latin.replace(/[^\d+]/g, "")}`;
 }

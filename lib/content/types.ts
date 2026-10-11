@@ -103,3 +103,60 @@ export type HoldingProfile = {
   leadership: Leader[];
   benefits: { title: string; description: string; icon: IconKey }[];
 };
+
+export type SocialLink = { label: string; href: string };
+
+/** Global settings editable from the admin panel. */
+export type SiteSettings = {
+  name: string;
+  nameEn: string;
+  shortName: string;
+  description: string;
+  foundedYear: number;
+  email: string;
+  phone: string;
+  address: string;
+  social: SocialLink[];
+};
+
+type Heading = { title: string; description: string };
+
+/** Editable copy on the home page. */
+export type HomeContent = {
+  hero: { badge: string; title: string; description: string };
+  intro: { title: string };
+  showcase: Heading;
+  projects: { title: string };
+  services: Heading;
+  news: { title: string };
+  cta: Heading;
+};
+
+export type PageKey = "about" | "subsidiaries" | "services" | "projects" | "news" | "careers" | "contact";
+
+/** Header copy (title + description) of each inner page. */
+export type PagesContent = Record<PageKey, Heading>;
+
+export type ContactMessage = {
+  id: number;
+  name: string;
+  email: string;
+  company: string;
+  subsidiary: string;
+  message: string;
+  createdAt: string;
+  read: boolean;
+};
+
+export type JobApplication = {
+  id: number;
+  jobId: string;
+  jobTitle: string;
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  resumeName: string;
+  createdAt: string;
+  read: boolean;
+};
